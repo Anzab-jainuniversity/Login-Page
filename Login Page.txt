@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Pages Project</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+</head>
+<style>
+body {
+  background-image: url('bg.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+</style>
+    <div id="app"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const app = document.getElementById('app');
+            app.innerHTML = `
+                <div class="login-page">
+                    <h1>Login</h1>
+                    <form id="loginForm">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" required>
+
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" required>
+
+                        <button type="submit">Login</button>
+                    </form>
+                </div>
+            `;
+
+            const loginForm = document.getElementById('loginForm');
+            loginForm.addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                const name = document.getElementById('name').value;
+                const password = document.getElementById('password').value;
+
+                if (name && password) {
+                    showFormPage(name);
+                }
+            });
+
+            function showFormPage(name) {
+                app.innerHTML = `
+                    <div class="form-page">
+                        <h1>Welcome, ${name}</h1>
+                        <form id="detailsForm">
+                            <label for="fullName">Full Name:</label>
+                            <input type="text" id="fullName" name="fullName" required>
+
+                            <label for="number">Phone Number:</label>
+                            <input type="tel" id="number" name="number" required>
+
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" required>
+
+                            <label for="birthDate">Birth Date:</label>
+                            <input type="date" id="birthDate" name="birthDate" required>
+
+                            <button type="submit">Submit</button>
+                        </form>
+                    </div>
+                `;
+
+                const detailsForm = document.getElementById('detailsForm');
+                detailsForm.addEventListener('submit', function (event) {
+                    event.preventDefault();
+
+                    const details = {
+                        fullName: document.getElementById('fullName').value,
+                        number: document.getElementById('number').value,
+                        email: document.getElementById('email').value,
+                        birthDate: document.getElementById('birthDate').value,
+                    };
+
+                    showProfilePage(details);
+                });
+            }
+
+            function showProfilePage(details) {
+                app.innerHTML = `
+                    <div class="profile-page">
+                        <h1>Your Profile</h1>
+                        <div class="profile-card">
+                            <p><strong>Full Name:</strong> ${details.fullName}</p>
+                            <p><strong>Phone Number:</strong> ${details.number}</p>
+                            <p><strong>Email:</strong> ${details.email}</p>
+                            <p><strong>Birth Date:</strong> ${details.birthDate}</p>
+                        </div>
+                    </div>
+                `;
+            }
+        });
+    </script>
+</body>
+</html>
